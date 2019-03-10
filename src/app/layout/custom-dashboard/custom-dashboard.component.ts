@@ -290,7 +290,7 @@ export class CustomDashboardComponent implements OnInit {
            }else if(this.customList[j]["name"] =="NOTIFICATION TYPE" && j!=0){
            this.PrepareTeeObj(this.customList[j]["name"], this.treeObject, j);
            }else if(this.customList[j]["name"] =="REGION" && j!=0){
-         //  this.PrepareTeeObj(this.customList[j]["name"], this.treeObject, j);
+            this.PrepareTeeObj(this.customList[j]["name"], this.treeObject, j);
            }else if(this.customList[j]["name"] =="BATCH PROCESS" && j!=0){
             this.PrepareTeeObj(this.customList[j]["name"], this.treeObject, j);
            }
