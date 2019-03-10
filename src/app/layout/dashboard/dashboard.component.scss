@@ -1,0 +1,75 @@
+.mrgTop10{
+    margin-top: 10px;
+}
+
+.my-card
+{
+    position:absolute;
+    left:40%;
+    top:-20px;
+    border-radius:50%;
+}
+.white{
+    color:#ffffff;
+}
+
+.regionBgcolor1{
+    background: #00A5A8 !important;
+}
+
+.regionBgcolor2{
+    background: #ff976a !important;
+}
+
+.regionBgcolor3{
+    background: #5CE0B8 !important;
+}
+regionBgcolor3
+.bg-gradient-x-warning{
+    background-image:-webkit-gradient(linear,left top,right top,from(#FF976A),to(#FFC2A4));/* background-image:-webkit-linear-gradient(left,#FF976A 0,#FFC2A4 100%); */
+    background-image:-moz-linear-gradient(left,#FF976A 0,#FFC2A4 100%);
+    background-image:-o-linear-gradient(left,#FF976A 0,#FFC2A4 100%);/* background-image:linear-gradient(to right,#FF976A 0,#FFC2A4 100%); */
+    background-repeat:repeat-x;}.bg-gradient-y-warning{background-image:-webkit-gradient(linear,left top,left bottom,from(#FF976A),to(#FFC2A4));
+    background-image:-webkit-linear-gradient(top,#FF976A 0,#FFC2A4 100%);
+    background-image:-moz-linear-gradient(top,#FF976A 0,#FFC2A4 100%);
+    background-image:-o-linear-gradient(top,#FF976A 0,#FFC2A4 100%);
+    background-image:linear-gradient(to bottom,#FF976A 0,#FFC2A4 100%);
+    background-repeat:repeat-x}
+.bg-gradient-directional-warning{
+    background-image:-webkit-linear-gradient(45deg,#FF976A,#FFC2A4);
+    background-image:-moz-linear-gradient(45deg,#FF976A,#FFC2A4);
+    background-image:-o-linear-gradient(45deg,#FF976A,#FFC2A4);
+    background-image:linear-gradient(45deg,#FF976A,#FFC2A4);
+    background-repeat:repeat-x}
+
+    .progress-bar {
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -moz-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        color: #FFF;
+        text-align: center;
+        background-color: #00B5B8;
+        -webkit-transition: width .6s ease;
+        -o-transition: width .6s ease;
+        -moz-transition: width .6s ease;
+        transition: width .6s ease;
+    }
+
+    .accordion div.card div.card-header{
+        padding:5px !important;
+        background: #3f51b5 !important;
+        
+    }
+    
+    .accordion div.card-header button {
+        font-size: 14px !important;
+        color:#ffffff !important;
+     }
+
+     

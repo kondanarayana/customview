@@ -1,0 +1,219 @@
+<div >
+
+    <!--     <treetable
+        [tree]="arrayOfNodesTree"
+        (nodeClicked)="logNode($event)">
+      </treetable> -->
+    <h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2>
+   <!--  <div class="row">
+        <div class="col-md-12">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let slider of sliders">
+                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
+                    <div class="carousel-caption">
+                        <h3>{{slider.label}}</h3>
+                        <p>{{slider.text}}</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+    <hr> -->
+<!-- 
+    <div  *ngIf ="reports && reports.length >0">
+        <div  *ngFor="let report of reports">
+            <div class="alert alert-primary" role="alert">
+                    {{report.headTitle}}
+                  </div>
+            <div class="row">
+            <div class="col-xl-3 col-lg-6" *ngFor="let item of report.details">
+                <app-stat  [bgClass]=item.bgClass [title]=item.title [icon]=item.icon [count]=item.count [label]=item.label ></app-stat>
+           </div> 
+        </div>
+        </div>
+    </div>
+    <hr />
+    <ngb-alert [type]="alert.type" (close)="closeAlert(alert)" *ngFor="let alert of alerts">{{ alert.message }}</ngb-alert>
+    <hr />
+    <div class="row">
+    <div class="col col-sm-6" *ngIf="reports && reports.length>0">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Analysis
+                </div>
+                <div class="card-body" >
+                    <canvas baseChart height="180px"  [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"  [colors]="doughnutChartColors" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Your account at glance
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Account name</strong>:TD Bank(CAD)</p>
+                        <p><strong>Account Manager</strong>:umpsolutions@td.com</p>
+                        <p><strong>Available credit</strong>:559998 CAD</p>
+                    </div>
+                </div>
+            </div>
+    </div> -->
+    <div class="row">
+       <div class="col-sm-6"> <button class="btn btn-primary" (click)="activeIds=[]" >close all</button></div>
+        <div class="col-sm-6 text-right"><button class="btn btn-primary " (click)="openAll()" >open all</button></div>
+    </div>
+      <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds">
+        <ngb-panel *ngFor="let container of dashboardDeatails; let i= index" title="{{container.type}}" id="panel-{{i}}">
+          <ng-template ngbPanelContent>
+              <ng-container *ngFor="let section of container.sections;let first =first ; let last =last">
+                <div class="alert alert-primary" role="alert" [ngClass] ="{mrgTop10:!first}">
+                        {{section.headTitle}}
+                    </div> 
+                <div class="row" style="background:#e9ecef;padding:10px">
+                <ng-container  *ngFor="let item of section.details">
+                    <ng-container *ngIf="container.type=='NOTIFICATION TYPE'" >
+                        <div class="col-xl-3 col-lg-6">
+                            <app-stat [bgClass]=item.bgClass [title]=item.title [icon]=item.icon [count]=item.count [label]=item.label ></app-stat> 
+                    </div>
+                     </ng-container> 
+                     <ng-container *ngIf="container.type=='ALERT TYPE'">
+                            <div class="col-xl-4 col-lg-6">
+                            <div  class="card border-{{item.bgClass}} mx-sm-1 p-3">
+                                    <div class="card border-{{item.bgClass}} shadow text-{{item.bgClass}} p-3 my-card" > 
+                                        <span [class]="'fa '+(item.icon)" aria-hidden="true"></span></div>
+                                    <div class="text-{{item.bgClass}} text-center mt-3" style="min-height:53px;"><p style="font-size:13px">{{item.title}}</p></div>
+                                    <div class="text-{{item.bgClass}} text-center mt-2"><h1>{{item.count}}</h1></div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                            <div class="progress-bar bg-{{item.bgClass}}" role="progressbar" [ngStyle]="{'width': item.label}" aria-valuenow="item.count" aria-valuemin="0" aria-valuemax="100000"></div>
+                                        </div>
+                             </div>  
+                        </div>
+                    </ng-container>  
+                    <ng-container *ngIf="container.type=='REGION'">
+                            <div class="col-xl-12 col-md-12">
+                            <div class="card overflow-hidden">
+                                    <div class="card-content">
+                                        <div class="media align-items-stretch white" [ngClass]="(item.bgClass=='primary')?'regionBgcolor1':'regionBgcolor2'">
+                                            <div  [ngClass]="(item.bgClass=='primary')?'regionBgcolor1':'regionBgcolor2'" class="bg-darken-2 p-2 media-middle">
+                                                <i style="font-size:50px" [class]="'fa '+(item.icon)" ></i>
+                                            </div>
+                                            <div class="media-body p-2 white" >
+                                                <h4>{{item.title}}</h4>
+                                                <span>Included All</span>
+                                            </div>
+                                            <div class="media-right p-2 media-middle white" >
+                                                <h1>{{item.count}}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                    </ng-container> 
+                    <ng-container *ngIf="container.type=='BATCH'">
+                            <div class="col-xl-12 col-md-12">
+                            <div class="card overflow-hidden">
+                                    <div class="card-content">
+                                        <div class="media align-items-stretch white regionBgcolor3">
+                                            <div   class="regionBgcolor3 bg-darken-2 p-2 media-middle">
+                                                <i style="font-size:50px" [class]="'fa '+(item.icon)" ></i>
+                                            </div>
+                                            <div class="media-body p-2 white" >
+                                                <h4>{{item.title}}</h4>
+                                                <span>Included All</span>
+                                            </div>
+                                            <div class="media-right p-2 media-middle white" >
+                                                <h1>{{item.count}}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                    </ng-container>
+                </ng-container>
+                </div>
+            </ng-container>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
+      
+     
+      
+     
+ 
+          <!-- <div class="row">
+                <div class="col-xl-6 col-md-12">
+                    <div class="card overflow-hidden">
+                        <div class="card-content">
+                            <div class="media align-items-stretch regionBgcolor1 white">
+                                <div class="regionBgcolor1 bg-darken-2 p-2 media-middle">
+                                    <i class="fa fa-pencil" ></i>
+                                </div>
+                                <div class="media-body p-2 white" >
+                                    <h4>Total Posts</h4>
+                                    <span>Monthly blog posts</span>
+                                </div>
+                                <div class="media-right p-2 media-middle white" >
+                                    <h1>18,000</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="media align-items-stretch regionBgcolor2 white">
+                                <div class="regionBgcolor2 bg-darken-2 p-2 media-middle">
+                                    <i class="icon-speech font-large-2 white"></i>
+                                </div>
+                                <div class="media-body p-2">
+                                    <h4>Total Comments</h4>
+                                    <span>Monthly blog comments</span>
+                                </div>
+                                <div class="media-right p-2 media-middle">
+                                    <h1>84,695</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+       <!--  <div class="jumbotron">
+                <div class="row w-100">
+                        <div class="col-md-3">
+                            <div class="card border-info mx-sm-1 p-3">
+                                <div class="card border-info shadow text-info p-3 my-card" ><span class="fa fa-car" aria-hidden="true"></span></div>
+                                <div class="text-info text-center mt-3"><h4>Cars</h4></div>
+                                <div class="text-info text-center mt-2"><h1>234</h1></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-success mx-sm-1 p-3">
+                                <div class="card border-success shadow text-success p-3 my-card"><span class="fa fa-eye" aria-hidden="true"></span></div>
+                                <div class="text-success text-center mt-3"><h4>Eyes</h4></div>
+                                <div class="text-success text-center mt-2"><h1>9332</h1></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-danger mx-sm-1 p-3">
+                                <div class="card border-danger shadow text-danger p-3 my-card" ><span class="fa fa-heart" aria-hidden="true"></span></div>
+                                <div class="text-danger text-center mt-3"><h4>Hearts</h4></div>
+                                <div class="text-danger text-center mt-2"><h1>346</h1></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-warning mx-sm-1 p-3">
+                                <div class="card border-warning shadow text-warning p-3 my-card" ><span class="fa fa-inbox" aria-hidden="true"></span></div>
+                                <div class="text-warning text-center mt-3"><h4>Inbox</h4></div>
+                                <div class="text-warning text-center mt-2"><h1>346</h1></div>
+                            </div>
+                        </div>
+                     </div>
+                </div>         
+          -->
+</div>

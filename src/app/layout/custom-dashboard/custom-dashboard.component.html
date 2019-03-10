@@ -1,0 +1,251 @@
+ 
+ 
+ <h2 class="text-muted">Custom Dashboard </h2>
+ <div >
+        <div class="example-container" >
+        
+                <h6>ALERTS LIST</h6>
+              
+                <div
+                  cdkDropList
+                  #todoList="cdkDropList"
+                  [cdkDropListData]="alertsList"
+                  [cdkDropListConnectedTo]="[doneList]"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="example-box" *ngFor="let item of alertsList" cdkDrag>{{item.name}}</div>
+                </div>
+              </div>
+              
+              <div class="example-container">
+                <h6>CUSTOM SELECTED ALERTS VIEW LIST</h6>
+              
+                <div
+                  cdkDropList
+                  #doneList="cdkDropList"
+                  [cdkDropListData]="customList"
+                  [cdkDropListConnectedTo]="[todoList]"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="example-box" *ngFor="let item of customList" cdkDrag>{{item.name}}</div>
+                </div>
+              </div>
+    <div class="row" >
+        <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-primary" [disabled]="customList.length==0" (click)="customize()">Customize</button>   
+        </div>
+    </div>
+
+</div>
+<!--     <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds">
+            <ngb-panel *ngFor="let container of dashboardDeatails; let i= index" title="{{container.type}}" id="panel-{{i}}">
+              <ng-template ngbPanelContent>
+                  <ng-container *ngFor="let section of container.sections;let first =first ; let last =last">
+                    <div class="alert alert-primary" role="alert" [ngClass] ="{mrgTop10:!first}">
+                            {{section.headTitle}}
+                        </div> 
+                    <div class="row" style="background:#e9ecef;padding:10px">
+                    <ng-container  *ngFor="let item of section.details">
+                        <ng-container *ngIf="container.type=='NOTIFICATION TYPE'" >
+                            <div class="col-xl-3 col-lg-6">
+                                <app-stat [bgClass]=item.bgClass [title]=item.title [icon]=item.icon [count]=item.count [label]=item.label ></app-stat> 
+                        </div>
+                         </ng-container> 
+                         <ng-container *ngIf="container.type=='ALERT TYPE'">
+                                <div class="col-xl-4 col-lg-6">
+                                <div  class="card border-{{item.bgClass}} mx-sm-1 p-3">
+                                        <div class="card border-{{item.bgClass}} shadow text-{{item.bgClass}} p-3 my-card" > 
+                                            <span [class]="'fa '+(item.icon)" aria-hidden="true"></span></div>
+                                        <div class="text-{{item.bgClass}} text-center mt-3" style="min-height:53px;"><p style="font-size:13px">{{item.title}}</p></div>
+                                        <div class="text-{{item.bgClass}} text-center mt-2"><h1>{{item.count}}</h1></div>
+                                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                                                <div class="progress-bar bg-{{item.bgClass}}" role="progressbar" [ngStyle]="{'width': item.label}" aria-valuenow="item.count" aria-valuemin="0" aria-valuemax="100000"></div>
+                                            </div>
+                                 </div>  
+                            </div>
+                        </ng-container>  
+                        <ng-container *ngIf="container.type=='REGION'">
+                                <div class="col-xl-12 col-md-12">
+                                <div class="card overflow-hidden">
+                                        <div class="card-content">
+                                            <div class="media align-items-stretch white" [ngClass]="(item.bgClass=='primary')?'regionBgcolor1':'regionBgcolor2'">
+                                                <div  [ngClass]="(item.bgClass=='primary')?'regionBgcolor1':'regionBgcolor2'" class="bg-darken-2 p-2 media-middle">
+                                                    <i style="font-size:50px" [class]="'fa '+(item.icon)" ></i>
+                                                </div>
+                                                <div class="media-body p-2 white" >
+                                                    <h4>{{item.title}}</h4>
+                                                    <span>Included All</span>
+                                                </div>
+                                                <div class="media-right p-2 media-middle white" >
+                                                    <h1>{{item.count}}</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                        </ng-container> 
+                        <ng-container *ngIf="container.type=='BATCH'">
+                                <div class="col-xl-12 col-md-12">
+                                <div class="card overflow-hidden">
+                                        <div class="card-content">
+                                            <div class="media align-items-stretch white regionBgcolor3">
+                                                <div   class="regionBgcolor3 bg-darken-2 p-2 media-middle">
+                                                    <i style="font-size:50px" [class]="'fa '+(item.icon)" ></i>
+                                                </div>
+                                                <div class="media-body p-2 white" >
+                                                    <h4>{{item.title}}</h4>
+                                                    <span>Included All</span>
+                                                </div>
+                                                <div class="media-right p-2 media-middle white" >
+                                                    <h1>{{item.count}}</h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                        </ng-container>
+                    </ng-container>
+                    </div>
+                </ng-container>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion> -->
+<!-- 
+          
+-------------------------{{laptop | json}}
+          <ngb-accordion  [closeOthers]="true"  activeIds="static-0">
+                <ngb-panel  *ngFor=" let children of laptop; let index = index" id="static-{{index}}" title="{{children.name}}">
+                  <ng-template ngbPanelContent>
+                      <ngb-accordion [closeOthers]="false">
+                          <ngb-panel  *ngFor=" let children2 of children.children; let index2 = index"  id="static2-{{index2}}" >
+                            <ng-template ngbPanelTitle>
+                                <span> <b></b> {{children2.name}} </span>
+                                    <ng-template ngbPanelContent>
+                                            <div class="row" style="background:#e9ecef;padding:10px">
+                                    <ng-container  *ngFor="let item of children2.details">
+                                            <ng-container *ngIf="(children2.name =='Email' || children2.name =='Sms' || children2.name =='Sm')" >
+                                                <div class="col-xl-3 col-lg-6">
+                                                    <app-stat [bgClass]=item.bgClass [title]=item.title [icon]=item.icon [count]=item.count [label]=item.label ></app-stat> 
+                                            </div>
+                                             </ng-container> 
+                                             <ng-container *ngIf="children2.name=='Pass Through'">
+                                                    <div class="col-xl-4 col-lg-6">
+                                                    <div  class="card border-{{item.bgClass}} mx-sm-1 p-3">
+                                                            <div class="card border-{{item.bgClass}} shadow text-{{item.bgClass}} p-3 my-card" > 
+                                                                <span [class]="'fa '+(item.icon)" aria-hidden="true"></span></div>
+                                                            <div class="text-{{item.bgClass}} text-center mt-3" style="min-height:53px;"><p style="font-size:13px">{{item.title}}</p></div>
+                                                            <div class="text-{{item.bgClass}} text-center mt-2"><h1>{{item.count}}</h1></div>
+                                                            <div class="progress mt-1 mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-{{item.bgClass}}" role="progressbar" [ngStyle]="{'width': item.label}" aria-valuenow="item.count" aria-valuemin="0" aria-valuemax="100000"></div>
+                                                                </div>
+                                                     </div>  
+                                                </div>
+                                            </ng-container>  
+                                            <ng-container *ngIf="children2.name=='Optim'">
+                                                    <div class="col-xl-4 col-lg-6">
+                                                    <div  class="card border-{{item.bgClass}} mx-sm-1 p-3">
+                                                            <div class="card border-{{item.bgClass}} shadow text-{{item.bgClass}} p-3 my-card" > 
+                                                                <span [class]="'fa '+(item.icon)" aria-hidden="true"></span></div>
+                                                            <div class="text-{{item.bgClass}} text-center mt-3" style="min-height:53px;"><p style="font-size:13px">{{item.title}}</p></div>
+                                                            <div class="text-{{item.bgClass}} text-center mt-2"><h1>{{item.count}}</h1></div>
+                                                            <div class="progress mt-1 mb-0" style="height: 7px;">
+                                                                    <div class="progress-bar bg-{{item.bgClass}}" role="progressbar" [ngStyle]="{'width': item.label}" aria-valuenow="item.count" aria-valuemin="0" aria-valuemax="100000"></div>
+                                                                </div>
+                                                     </div>  
+                                                </div>
+                                            </ng-container> 
+                                            <ng-container *ngIf="children2.name=='REGION'">
+                                                    <div class="col-xl-12 col-md-12">
+                                                    <div class="card overflow-hidden">
+                                                            <div class="card-content">
+                                                                <div class="media align-items-stretch white" [ngClass]="(item.bgClass=='primary')?'regionBgcolor1':'regionBgcolor2'">
+                                                                    <div  [ngClass]="(item.bgClass=='primary')?'regionBgcolor1':'regionBgcolor2'" class="bg-darken-2 p-2 media-middle">
+                                                                        <i style="font-size:50px" [class]="'fa '+(item.icon)" ></i>
+                                                                    </div>
+                                                                    <div class="media-body p-2 white" >
+                                                                        <h4>{{item.title}}</h4>
+                                                                        <span>Included All</span>
+                                                                    </div>
+                                                                    <div class="media-right p-2 media-middle white" >
+                                                                        <h1>{{item.count}}</h1>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                            </ng-container> 
+                                            <ng-container *ngIf="children2.name=='BATCH'">
+                                                    <div class="col-xl-12 col-md-12">
+                                                    <div class="card overflow-hidden">
+                                                            <div class="card-content">
+                                                                <div class="media align-items-stretch white regionBgcolor3">
+                                                                    <div   class="regionBgcolor3 bg-darken-2 p-2 media-middle">
+                                                                        <i style="font-size:50px" [class]="'fa '+(item.icon)" ></i>
+                                                                    </div>
+                                                                    <div class="media-body p-2 white" >
+                                                                        <h4>{{item.title}}</h4>
+                                                                        <span>Included All</span>
+                                                                    </div>
+                                                                    <div class="media-right p-2 media-middle white" >
+                                                                        <h1>{{item.count}}</h1>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                            </ng-container>
+                                        </ng-container>
+                                        </div>
+                                    </ng-template>
+                            </ng-template>
+                          </ngb-panel>
+                        </ngb-accordion>
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion> -->
+    <!-- 
+              <p-treeTable [value]="files">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of cols">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                        <tr>
+                            <td *ngFor="let col of cols; let i = index">
+                                <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                                {{rowData[col.field]}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-treeTable> -->
+
+             <!--    {{finalObj | json}} -->
+
+             
+
+          <!--    <p-tree  [value]="files1" layout="horizontal"></p-tree> -->
+
+
+              <!-- <p-tree  [value]="files" layout="horizontal"></p-tree>  -->
+                  {{finalObj | json}} 
+                <div class="row">
+                <ng-container *ngIf ="show" >
+                    <table width="100%">
+                            <tr style="background:#3f51b5;color:#ffffff">
+                                <td width="24%"></td>
+                                <td *ngFor="let item of customList" width="22%">{{item.name}}</td>
+                            </tr>
+                    </table>
+                    <div class="ui-fluid" style="width:100%">
+                    <p-tree styleClass="wid100"  [value]="finalObj" layout="horizontal" selectionMode="single"></p-tree>
+                    </div>
+                </ng-container>
+        </div>
+         
+
+    <!--     <p-tree [value]="TestData" layout="horizontal"></p-tree> -->
+        
+               
